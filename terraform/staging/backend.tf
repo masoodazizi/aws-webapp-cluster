@@ -2,7 +2,9 @@
 # S3 backend defined as the terraform remote state
 # INTERPOLATION is not ALLOWED!
 # S3 bucket should be created manually in advance
-# Update the bucket name accordingly
+# Update the bucket name accordingly and ...
+# change the local `terraform_state_bucket` as well.
+#
 # These two parameters are defined in init:
 #   * profile="aws_profile"
 #   * region="aws_region"
@@ -16,20 +18,21 @@
 
 terraform {
   backend "s3" {
-    bucket  = "myproject-terraform-remote-state"
-    key     = "staging/terraform.tfstate"
-    encrypt = true
+    # NOTE: change the local 'terraform_state_bucket' too.
+    bucket         = "myproject-terraform-remote-state"
+    key            = "staging/terraform.tfstate"
+    dynamodb_table = "myproject-terraform-state-locks"
+    encrypt        = true
   }
 }
 
-# data "terraform_remote_state" "global" {
-#   backend = "s3"
-#
-#   config {
-#     bucket  = "myproject-terraform-remote-state"
-#     key     = "global/terraform.tfstate"
-#     region  = "${var.aws_region}"
-#     profile = "${var.aws_profile}"
-#   }
-# }
+data "terraform_remote_state" "global" {
+  backend = "s3"
 
+  config {
+    bucket  = "myproject-terraform-remote-state"
+    key     = "global/terraform.tfstate"
+    region  = "${var.aws_region}"
+    profile = "${var.aws_profile}"
+  }
+}
