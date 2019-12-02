@@ -11,3 +11,7 @@ variable "access_cidrs" {
   default     = [""]
   description = "List of CIDRS of public IP addresses accessing to the resources"
 }
+
+variable "instance_type" {
+  default = "t3.medium"
+}

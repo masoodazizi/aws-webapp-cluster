@@ -13,3 +13,14 @@ resource "aws_alb" "ecs_alb" {
 
   tags = "${merge(var.tags, map("Name", "${var.env}_ecs_alb"))}"
 }
+
+resource "aws_launch_configuration" "ecs_lc" {
+  key_name      = "${data.terraform_remote_state.global.ssh_key}"
+  name_prefix   = "${var.env}-ecs-instance"
+  image_id      = "${data.aws_ssm_parameter.ecs_optimized_image_id.value}"
+  instance_type = "${var.instance_type}"
+}
+
+data "aws_ssm_parameter" "ecs_optimized_image_id" {
+  name = "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id"
+}
