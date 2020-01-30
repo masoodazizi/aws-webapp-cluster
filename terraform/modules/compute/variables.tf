@@ -1,11 +1,20 @@
-variable "env" {}
-variable "region" {}
-variable "profile" {}
-variable "terraform_state_bucket" {}
+variable "env" {
+}
 
-variable "private_subnets" {}
+variable "region" {
+}
 
-variable "public_subnets" {}
+variable "profile" {
+}
+
+variable "terraform_state_bucket" {
+}
+
+variable "private_subnets" {
+}
+
+variable "public_subnets" {
+}
 
 variable "access_cidrs" {
   default     = [""]
@@ -20,10 +29,11 @@ variable "root_volume_size" {
   default = "10"
 }
 
-variable "cluster_name" {}
+variable "cluster_name" {
+}
 
 variable "tags" {
-  type = "map"
+  type = map(string)
 }
 
 ##### AUTO SCALING GROUP VARIABLES
@@ -47,3 +57,4 @@ variable "asg_health_check_type" {
 variable "asg_health_check_grace_period" {
   default = "300"
 }
+

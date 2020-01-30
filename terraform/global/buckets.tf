@@ -25,5 +25,11 @@ resource "aws_s3_bucket" "alb_access_logs" {
   #   }
   # EOF
 
-  tags = "${merge(local.tags, map("Name", "alb_access_logs_bucket"))}"
+  tags = merge(
+    local.tags,
+    {
+      "Name" = "alb_access_logs_bucket"
+    },
+  )
 }
+

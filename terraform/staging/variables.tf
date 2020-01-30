@@ -14,4 +14,3 @@
 #   default = ["X.X.X.X/32"]
 #   # e.g $ curl api.ipify.org
 # }
-

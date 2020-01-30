@@ -39,13 +39,14 @@ resource "null_resource" "key_gen" {
 data "local_file" "ssh_public_key" {
   filename = "${local.ssh_key_path}.pub"
 
-  depends_on = ["null_resource.key_gen"]
+  depends_on = [null_resource.key_gen]
 }
 
 output "ssh_key" {
-  value = "${data.local_file.ssh_public_key.content}"
+  value = data.local_file.ssh_public_key.content
 }
 
 output "terraform_state_bucket" {
-  value = "${aws_s3_bucket.terraform_state.id}"
+  value = aws_s3_bucket.terraform_state.id
 }
+

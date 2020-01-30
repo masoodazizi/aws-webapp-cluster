@@ -24,15 +24,23 @@ terraform {
     dynamodb_table = "myproject-terraform-state-locks"
     encrypt        = true
   }
+  required_version = ">= 0.12"
 }
 
 data "terraform_remote_state" "global" {
   backend = "s3"
 
-  config {
+  config = {
     bucket  = "myproject-terraform-remote-state"
     key     = "global/terraform.tfstate"
-    region  = "${var.aws_region}"
-    profile = "${var.aws_profile}"
+    region  = var.aws_region
+    profile = var.aws_profile
   }
+}
+
+provider "aws" {
+  region  = var.aws_region
+  profile = var.aws_profile
+
+  version = "~> 2.46.0"
 }

@@ -24,12 +24,20 @@ terraform {
     dynamodb_table = "myproject-terraform-state-locks"
     encrypt        = true
   }
+  required_version = ">= 0.12"
 }
 
 data "terraform_remote_state" "init_state" {
   backend = "local"
 
-  config {
+  config = {
     path = "./init/terraform.tfstate"
   }
+}
+
+provider "aws" {
+  region  = var.aws_region
+  profile = var.aws_profile
+
+  version = "~> 2.46.0"
 }

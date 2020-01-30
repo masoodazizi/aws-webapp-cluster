@@ -1,4 +1,5 @@
-variable "env" {}
+variable "env" {
+}
 
 variable "cidr_block" {
   description = "Defines the CIDR for the whole VPC"
@@ -6,7 +7,7 @@ variable "cidr_block" {
 }
 
 variable "tags" {
-  type = "map"
+  type = map(string)
 }
 
 variable "public_subnets_cidrs" {
@@ -18,3 +19,4 @@ variable "private_subnets_cidrs" {
   default     = [""]
   description = "Comma separated list of subnets"
 }
+
