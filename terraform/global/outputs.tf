@@ -17,3 +17,17 @@ output "project" {
 output "developer" {
   value = "${local.developer}"
 }
+
+##### IAM ROLES
+
+output "ecs_instance_role_name" {
+  value = "${aws_iam_role.ecs_instance_role.name}"
+}
+
+output "ecs_service_role_name" {
+  value = "${aws_iam_role.ecs_service_role.name}"
+}
+
+output "ecs_service_autoscale_role_arn" {
+  value = "${aws_iam_role.ecs_service_autoscale_role.arn}"
+}

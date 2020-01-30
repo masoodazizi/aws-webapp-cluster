@@ -10,3 +10,4 @@
 
 # my custom variables
 myvars.tf
+secrets/*
